@@ -6,6 +6,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="SCORMCourses\**" />
+    <Content Remove="SCORMCourses\**" />
+    <EmbeddedResource Remove="SCORMCourses\**" />
+    <None Remove="SCORMCourses\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Remove="appsettings.Production..json" />
   </ItemGroup>
 

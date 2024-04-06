@@ -98,7 +98,24 @@ namespace OpenSourceSCORMLMS.Helpers
                 manifestTypeExtended root2 = new manifestTypeExtended(doc2.Load(XMLPath));
                 identifier = root.Getidentifier().Value;
                 title = identifier;
-                version = root.Getversion().Value;
+                try
+                {
+                    version = root.Getversion().Value;
+                }
+                catch (Exception)
+                {
+                    adlcp_rootv1p2.imscp.versionType versionType;
+                    if (root.Hasversion())
+                    {
+                        versionType = root.Getversion(); // this is the manifest's creator's version of this manifest, not SCORM version
+                    }
+                    else
+                    {
+                        versionType = new adlcp_rootv1p2.imscp.versionType("1.0");
+                    }
+
+                    version = versionType.Value;
+                }
                 // Now we start looking for the default web page. Organizations => organization => item
                 // get the identifierref for the first item
                 // then find that identifier in resources => resource. That resource.href is the default launching page for the sco
